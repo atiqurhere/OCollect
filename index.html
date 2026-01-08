@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b1220" />
+  <title>OrderCollector Pro — Download</title>
+  <meta name="description" content="Download the latest release of OrderCollector Pro — a production-ready Flutter + Firebase order collection app." />
+
+  <style>
+    :root{
+      --bg0:#060a12;
+      --bg1:#0b1220;
+      --card: rgba(255,255,255,.06);
+      --border: rgba(255,255,255,.10);
+      --text:#eaf0ff;
+      --muted: rgba(234,240,255,.70);
+      --muted2: rgba(234,240,255,.55);
+      --accent:#6ea8ff;
+      --accent2:#8b5cf6;
+      --ok:#22c55e;
+      --warn:#f59e0b;
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
+      --radius: 22px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--font);
+      color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 20% 10%, rgba(110,168,255,.22), transparent 55%),
+        radial-gradient(1000px 700px at 80% 20%, rgba(139,92,246,.20), transparent 55%),
+        radial-gradient(1000px 700px at 50% 100%, rgba(34,197,94,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+
+    a{color:inherit}
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:28px 18px 64px;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:10px 0 18px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-decoration:none;
+    }
+    .logo{
+      width:44px;height:44px;
+      border-radius:14px;
+      background:
+        radial-gradient(20px 20px at 30% 30%, rgba(255,255,255,.45), transparent 60%),
+        linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 12px 30px rgba(110,168,255,.20);
+      border:1px solid rgba(255,255,255,.18);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo:after{
+      content:"";
+      position:absolute; inset:-30px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent);
+      transform: rotate(25deg);
+      animation: shine 5.5s linear infinite;
+    }
+    @keyframes shine{
+      0%{transform:translateX(-40%) rotate(25deg)}
+      100%{transform:translateX(40%) rotate(25deg)}
+    }
+    .brand h1{
+      margin:0;
+      font-size:16px;
+      letter-spacing:.2px;
+      line-height:1.1;
+    }
+    .brand p{
+      margin:2px 0 0;
+      font-size:12px;
+      color:var(--muted2);
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--border);
+      color:var(--muted);
+      font-size:12px;
+      white-space:nowrap;
+    }
+    .dot{
+      width:8px;height:8px;border-radius:50%;
+      background:var(--warn);
+      box-shadow:0 0 0 4px rgba(245,158,11,.15);
+    }
+    .dot.ok{
+      background:var(--ok);
+      box-shadow:0 0 0 4px rgba(34,197,94,.15);
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:18px;
+      align-items:stretch;
+      margin-top:10px;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .heroMain{
+      padding:26px 22px;
+      position:relative;
+      overflow:hidden;
+    }
+    .heroMain:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(600px 220px at 15% 0%, rgba(110,168,255,.22), transparent 60%),
+        radial-gradient(600px 240px at 85% 0%, rgba(139,92,246,.18), transparent 60%);
+      pointer-events:none;
+    }
+    .heroMain > *{position:relative}
+
+    .kicker{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-bottom:10px;
+    }
+    .tag{
+      font-size:12px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:var(--muted);
+    }
+
+    h2{
+      margin:10px 0 8px;
+      font-size:34px;
+      letter-spacing:-.6px;
+      line-height:1.06;
+    }
+    .lead{
+      margin:0 0 16px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+      max-width:62ch;
+    }
+
+    .ctaRow{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top:14px;
+    }
+    .btn{
+      appearance:none;
+      border:none;
+      cursor:pointer;
+      border-radius:14px;
+      padding:12px 14px;
+      font-weight:650;
+      letter-spacing:.2px;
+      font-size:14px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      text-decoration:none;
+      transition: transform .12s ease, filter .12s ease, background .12s ease;
+      user-select:none;
+      min-height:44px;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btnPrimary{
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color:#081225;
+      box-shadow: 0 16px 40px rgba(110,168,255,.18);
+    }
+    .btnPrimary:hover{filter:brightness(1.05)}
+    .btnGhost{
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.14);
+      color:var(--text);
+    }
+    .btnGhost:hover{background:rgba(255,255,255,.09)}
+    .btnSmall{
+      padding:10px 12px;
+      border-radius:12px;
+      font-size:13px;
+      min-height:40px;
+    }
+    .icon{
+      width:18px;height:18px; display:inline-block;
+    }
+
+    .heroSide{
+      padding:18px 18px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .stat{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      padding:12px 12px;
+      border-radius:16px;
+      background:rgba(0,0,0,.18);
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .stat .k{
+      color:var(--muted2);
+      font-size:12px;
+    }
+    .stat .v{
+      font-weight:700;
+      font-size:13px;
+    }
+    .notes{
+      padding:14px 14px;
+      border-radius:18px;
+      background:rgba(0,0,0,.18);
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .notes h3{
+      margin:0 0 8px;
+      font-size:13px;
+      letter-spacing:.2px;
+      color:var(--muted);
+      font-weight:700;
+    }
+    .notes pre{
+      margin:0;
+      white-space:pre-wrap;
+      word-wrap:break-word;
+      font-family: var(--font);
+      color: var(--text);
+      font-size:13px;
+      line-height:1.55;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+      margin-top:18px;
+    }
+    .mini{
+      padding:16px 16px;
+      border-radius:22px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .mini h4{
+      margin:0 0 6px;
+      font-size:14px;
+      letter-spacing:.1px;
+    }
+    .mini p{
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.6;
+    }
+
+    .section{
+      margin-top:18px;
+      padding:18px;
+    }
+    .section h3{
+      margin:0 0 10px;
+      font-size:16px;
+    }
+    .steps{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+      line-height:1.8;
+      font-size:13px;
+    }
+    .hint{
+      margin-top:12px;
+      padding:12px 12px;
+      border-radius:16px;
+      border:1px dashed rgba(255,255,255,.16);
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.6;
+      background:rgba(255,255,255,.04);
+    }
+
+    .footer{
+      margin-top:18px;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      color:var(--muted2);
+      font-size:12px;
+      padding:8px 4px 0;
+    }
+    .statusLine{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--muted);
+      font-size:12px;
+      margin-top:8px;
+    }
+    code.inline{
+      background:rgba(0,0,0,.25);
+      border:1px solid rgba(255,255,255,.10);
+      padding:2px 7px;
+      border-radius:999px;
+      color:var(--text);
+      font-size:12px;
+    }
+
+    @media (max-width: 920px){
+      .hero{grid-template-columns:1fr}
+      h2{font-size:30px}
+      .grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="./">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>OrderCollector Pro 📦</h1>
+          <p>Latest release download • Android APK</p>
+        </div>
+      </a>
+
+      <div class="pill" id="fetchPill" title="Release info status">
+        <span class="dot" id="fetchDot"></span>
+        <span id="fetchText">Loading latest release…</span>
+      </div>
+    </header>
+
+    <main class="hero">
+      <section class="card heroMain">
+        <div class="kicker">
+          <span class="tag">Flutter + Firebase</span>
+          <span class="tag">Admin + Collector Roles</span>
+          <span class="tag">Free Plan Friendly</span>
+        </div>
+
+        <h2>Download the latest<br/>OrderCollector Pro release.</h2>
+        <p class="lead">
+          A production-ready order collection system for stores — built with Flutter, Firebase Auth, and Cloud Firestore.
+          Grab the newest APK below and install it on your Android device.
+        </p>
+
+        <div class="ctaRow">
+          <a class="btn btnPrimary" id="downloadBtn" href="#" rel="noopener" target="_blank" aria-disabled="true">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 3v10m0 0 4-4m-4 4-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Download APK
+          </a>
+
+          <a class="btn btnGhost" id="releaseLink" href="#" rel="noopener" target="_blank" aria-disabled="true">
+            View Release
+          </a>
+
+          <button class="btn btnGhost btnSmall" id="copyLinkBtn" type="button" disabled>
+            Copy download link
+          </button>
+        </div>
+
+        <div class="statusLine">
+          <span>Version:</span> <code class="inline" id="ver">—</code>
+          <span>Build:</span> <code class="inline" id="build">—</code>
+          <span>Source:</span> <code class="inline">/version.json</code>
+        </div>
+
+        <div class="grid">
+          <div class="mini">
+            <h4>Fast install</h4>
+            <p>One click download, then install the APK on Android.</p>
+          </div>
+          <div class="mini">
+            <h4>Reliable updates</h4>
+            <p>This page automatically reads the newest release from <code class="inline">version.json</code>.</p>
+          </div>
+          <div class="mini">
+            <h4>Clean release notes</h4>
+            <p>What changed is displayed directly here, no extra scrolling.</p>
+          </div>
+        </div>
+      </section>
+
+      <aside class="card heroSide">
+        <div class="stat">
+          <div class="k">App</div>
+          <div class="v">OrderCollector Pro</div>
+        </div>
+        <div class="stat">
+          <div class="k">Platform</div>
+          <div class="v">Android (APK)</div>
+        </div>
+        <div class="stat">
+          <div class="k">Channel</div>
+          <div class="v">Latest Release</div>
+        </div>
+
+        <div class="notes">
+          <h3>Release Notes</h3>
+          <pre id="notes">Loading…</pre>
+        </div>
+      </aside>
+    </main>
+
+    <section class="card section">
+      <h3>How to install (Android)</h3>
+      <ol class="steps">
+        <li>Download the APK using the button above.</li>
+        <li>Open the downloaded file and tap <b>Install</b>.</li>
+        <li>If Android blocks it, enable <b>Install unknown apps</b> for your browser or file manager.</li>
+        <li>After installing, open the app and log in with your provided account.</li>
+      </ol>
+
+      <div class="hint">
+        Tip: If you use GitHub Pages and see a cached old version, hard refresh (Ctrl+F5) or add a cache-buster like
+        <code class="inline">/version.json?v=</code> (this page already does that automatically).
+      </div>
+    </section>
+
+    <div class="footer">
+      <div>© <span id="year"></span> OrderCollector Pro</div>
+      <div id="footerMeta">Release data: <span id="meta">—</span></div>
+    </div>
+  </div>
+
+  <script>
+    const els = {
+      ver: document.getElementById("ver"),
+      build: document.getElementById("build"),
+      notes: document.getElementById("notes"),
+      downloadBtn: document.getElementById("downloadBtn"),
+      releaseLink: document.getElementById("releaseLink"),
+      copyLinkBtn: document.getElementById("copyLinkBtn"),
+      fetchText: document.getElementById("fetchText"),
+      fetchDot: document.getElementById("fetchDot"),
+      year: document.getElementById("year"),
+      meta: document.getElementById("meta")
+    };
+
+    els.year.textContent = new Date().getFullYear();
+
+    function setStatus(ok, text){
+      els.fetchText.textContent = text;
+      els.fetchDot.classList.toggle("ok", !!ok);
+    }
+
+    function safeText(v){
+      if (v === null || v === undefined) return "—";
+      return String(v);
+    }
+
+    function guessReleasePage(downloadUrl){
+      // If downloadUrl looks like: https://github.com/<owner>/<repo>/releases/download/v1.1.0/app-release.apk
+      // then release page is: https://github.com/<owner>/<repo>/releases/tag/v1.1.0
+      try {
+        const u = new URL(downloadUrl);
+        const parts = u.pathname.split("/").filter(Boolean);
+        const idx = parts.indexOf("download");
+        if (idx !== -1 && parts[idx + 1]) {
+          const tag = parts[idx + 1];
+          return `${u.origin}/${parts[0]}/${parts[1]}/releases/tag/${tag}`;
+        }
+      } catch (_) {}
+      return downloadUrl;
+    }
+
+    async function loadVersion(){
+      try{
+        // Cache-bust so GitHub Pages doesn’t serve an old JSON
+        const url = `/version.json?v=${Date.now()}`;
+        const res = await fetch(url, { cache: "no-store" });
+        if(!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+
+        const version = safeText(data.version);
+        const buildNumber = safeText(data.buildNumber);
+        const downloadUrl = safeText(data.downloadUrl);
+        const releaseNotes = safeText(data.releaseNotes);
+
+        els.ver.textContent = version;
+        els.build.textContent = buildNumber;
+        els.notes.textContent = releaseNotes;
+
+        // Buttons
+        if (downloadUrl && downloadUrl !== "—") {
+          els.downloadBtn.href = downloadUrl;
+          els.downloadBtn.setAttribute("aria-disabled","false");
+          els.releaseLink.href = guessReleasePage(downloadUrl);
+          els.releaseLink.setAttribute("aria-disabled","false");
+          els.copyLinkBtn.disabled = false;
+
+          els.copyLinkBtn.addEventListener("click", async () => {
+            try{
+              await navigator.clipboard.writeText(downloadUrl);
+              els.copyLinkBtn.textContent = "Copied ✓";
+              setTimeout(() => els.copyLinkBtn.textContent = "Copy download link", 1400);
+            }catch(e){
+              // Fallback if clipboard is blocked
+              prompt("Copy this link:", downloadUrl);
+            }
+          });
+        }
+
+        els.meta.textContent = `v${version} (build ${buildNumber})`;
+        setStatus(true, "Latest release loaded");
+      }catch(err){
+        els.notes.textContent =
+          "Could not load /version.json.\n\nFix:\n- Ensure version.json exists at the repo root\n- If using GitHub Pages, confirm it is published on the same branch\n- Check JSON syntax";
+        setStatus(false, "Failed to load release info");
+        els.meta.textContent = "Not available";
+        console.error(err);
+      }
+    }
+
+    loadVersion();
+  </script>
+</body>
+</html>
