@@ -6,31 +6,19 @@
   <meta name="theme-color" content="#0b1220" />
   <title>OrderCollector Pro — Download</title>
   <meta name="description" content="Download the latest release of OrderCollector Pro — a production-ready Flutter + Firebase order collection app." />
-
   <style>
     :root{
-      --bg0:#060a12;
-      --bg1:#0b1220;
-      --card: rgba(255,255,255,.06);
-      --border: rgba(255,255,255,.10);
-      --text:#eaf0ff;
-      --muted: rgba(234,240,255,.70);
-      --muted2: rgba(234,240,255,.55);
-      --accent:#6ea8ff;
-      --accent2:#8b5cf6;
-      --ok:#22c55e;
-      --warn:#f59e0b;
-      --error:#ef4444;
-      --shadow: 0 20px 60px rgba(0,0,0,.45);
-      --radius: 22px;
-      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --bg0:#060a12;--bg1:#0b1220;--card:rgba(255,255,255,.07);--border:rgba(255,255,255,.10);
+      --text:#eaf0ff;--muted:rgba(234,240,255,.72);--muted2:rgba(234,240,255,.55);
+      --accent:#6ea8ff;--accent2:#8b5cf6;--ok:#22c55e;--warn:#f59e0b;--error:#ef4444;
+      --shadow:0 20px 60px rgba(0,0,0,.45);--radius:22px;
+      --font:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+      --mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0;
-      font-family:var(--font);
-      color:var(--text);
+      margin:0;font-family:var(--font);color:var(--text);
       background:
         radial-gradient(1200px 800px at 20% 10%, rgba(110,168,255,.22), transparent 55%),
         radial-gradient(1000px 700px at 80% 20%, rgba(139,92,246,.20), transparent 55%),
@@ -39,87 +27,71 @@
       overflow-x:hidden;
     }
     a{color:inherit}
-    .wrap{max-width:1100px;margin:0 auto;padding:28px 18px 64px;}
-
+    .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 70px;position:relative;}
     header{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 0 18px;}
     .brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
+    .logoWrap{position:relative;width:44px;height:44px}
     .logoImg{
-      width:44px;height:44px;border-radius:14px;
-      border:1px solid rgba(255,255,255,.18);
-      box-shadow: 0 12px 30px rgba(110,168,255,.20);
-      object-fit:cover;
-      background: rgba(255,255,255,.06);
+      width:44px;height:44px;border-radius:14px;border:1px solid rgba(255,255,255,.18);
+      box-shadow:0 12px 30px rgba(110,168,255,.18);object-fit:cover;background:rgba(255,255,255,.06);
+    }
+    .logoFallback{
+      display:none;width:44px;height:44px;border-radius:14px;border:1px solid rgba(255,255,255,.18);
+      background:linear-gradient(135deg,var(--accent),var(--accent2));place-items:center;
+      box-shadow:0 12px 30px rgba(110,168,255,.18);color:#081225;font-weight:900;
     }
     .brand h1{margin:0;font-size:16px;letter-spacing:.2px;line-height:1.1;}
     .brand p{margin:2px 0 0;font-size:12px;color:var(--muted2);}
-
     .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--muted);font-size:12px;white-space:nowrap;}
     .dot{width:8px;height:8px;border-radius:50%;background:var(--warn);box-shadow:0 0 0 4px rgba(245,158,11,.15);}
     .dot.ok{background:var(--ok);box-shadow:0 0 0 4px rgba(34,197,94,.15);}
     .dot.err{background:var(--error);box-shadow:0 0 0 4px rgba(239,68,68,.18);}
-
-    .hero{display:grid;grid-template-columns: 1.25fr .75fr;gap:18px;align-items:stretch;margin-top:10px;}
+    .hero{display:grid;grid-template-columns: 1.35fr .65fr;gap:18px;align-items:stretch;margin-top:10px;}
     .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);backdrop-filter: blur(10px);}
-
     .heroMain{padding:26px 22px;position:relative;overflow:hidden;}
-    .heroMain:before{content:"";position:absolute; inset:-2px;background:
-      radial-gradient(600px 220px at 15% 0%, rgba(110,168,255,.22), transparent 60%),
-      radial-gradient(600px 240px at 85% 0%, rgba(139,92,246,.18), transparent 60%);pointer-events:none;}
-    .heroMain > *{position:relative}
-
     .kicker{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:10px;}
     .tag{font-size:12px;padding:7px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:var(--muted);}
-    h2{margin:10px 0 8px;font-size:34px;letter-spacing:-.6px;line-height:1.06;}
-    .lead{margin:0 0 16px;color:var(--muted);font-size:14px;line-height:1.6;max-width:62ch;}
-
+    h2{margin:10px 0 8px;font-size:36px;letter-spacing:-.7px;line-height:1.06;}
+    .lead{margin:0 0 16px;color:var(--muted);font-size:14px;line-height:1.65;max-width:66ch;}
     .ctaRow{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:14px;}
-    .btn{appearance:none;border:none;cursor:pointer;border-radius:14px;padding:12px 14px;font-weight:650;letter-spacing:.2px;font-size:14px;display:inline-flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;transition: transform .12s ease, filter .12s ease, background .12s ease;user-select:none;min-height:44px;}
+    .btn{
+      appearance:none;border:none;cursor:pointer;border-radius:14px;padding:12px 14px;font-weight:750;letter-spacing:.2px;font-size:14px;
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;
+      transition:transform .12s ease,filter .12s ease,background .12s ease,border-color .12s ease;user-select:none;min-height:44px;
+    }
     .btn:active{transform:translateY(1px)}
-    .btnPrimary{background: linear-gradient(135deg, var(--accent), var(--accent2));color:#081225;box-shadow: 0 16px 40px rgba(110,168,255,.18);}
-    .btnPrimary:hover{filter:brightness(1.05)}
+    .btnPrimary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#081225;box-shadow:0 16px 40px rgba(110,168,255,.16);}
+    .btnPrimary:hover{filter:brightness(1.06)}
     .btnGhost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:var(--text);}
-    .btnGhost:hover{background:rgba(255,255,255,.09)}
+    .btnGhost:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.20)}
     .btnSmall{padding:10px 12px;border-radius:12px;font-size:13px;min-height:40px;}
-    .icon{width:18px;height:18px; display:inline-block;}
-
-    .statusLine{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:12px;margin-top:8px;flex-wrap:wrap}
-    code.inline{background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.10);padding:2px 7px;border-radius:999px;color:var(--text);font-size:12px;}
-
+    .icon{width:18px;height:18px;display:inline-block;}
+    .statusLine{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:12px;margin-top:10px;flex-wrap:wrap}
+    code.inline{background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.10);padding:2px 7px;border-radius:999px;color:var(--text);font-size:12px;font-family:var(--mono);}
+    .flag{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;font-size:12px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);}
+    .flag.req{border-color: rgba(239,68,68,.35);background: rgba(239,68,68,.12);}
     .heroSide{padding:18px 18px;display:flex;flex-direction:column;gap:12px;}
     .stat{display:flex;justify-content:space-between;gap:10px;padding:12px 12px;border-radius:16px;background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.10);}
     .stat .k{color:var(--muted2);font-size:12px;}
-    .stat .v{font-weight:700;font-size:13px;}
-    .flag{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;font-size:12px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);}
-    .flag.req{border-color: rgba(239,68,68,.35);background: rgba(239,68,68,.12);}
-
-    .notes{padding:14px 14px;border-radius:18px;background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.10);}
-    .notes h3{margin:0 0 8px;font-size:13px;letter-spacing:.2px;color:var(--muted);font-weight:700;}
-    .notes pre{margin:0;white-space:pre-wrap;word-wrap:break-word;font-family: var(--font);color: var(--text);font-size:13px;line-height:1.55;}
-
-    .section{margin-top:18px;padding:18px;}
-    .section h3{margin:0 0 10px;font-size:16px;}
-    .steps{margin:0;padding-left:18px;color:var(--muted);line-height:1.8;font-size:13px;}
-
-    .hint{margin-top:12px;padding:12px 12px;border-radius:16px;border:1px dashed rgba(255,255,255,.16);color:var(--muted);font-size:12px;line-height:1.6;background:rgba(255,255,255,.04);}
-
-    .debug{
-      margin-top:12px;
-      padding:12px;
-      border-radius:16px;
-      background: rgba(0,0,0,.18);
-      border: 1px solid rgba(255,255,255,.10);
-      color: var(--muted);
-      font-size:12px;
-      line-height:1.55;
+    .stat .v{font-weight:800;font-size:13px;}
+    .box{padding:14px 14px;border-radius:18px;background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.10);}
+    .box h3{margin:0 0 8px;font-size:13px;letter-spacing:.2px;color:var(--muted);font-weight:800;}
+    .box pre{margin:0;white-space:pre-wrap;word-wrap:break-word;font-family:var(--font);color:var(--text);font-size:13px;line-height:1.55;}
+    .devRow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .devName{font-weight:900}
+    .devTag{color:var(--muted);font-size:12px}
+    .devLinks{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .chip{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);font-size:12px;text-decoration:none}
+    .chip:hover{background:rgba(255,255,255,.09)}
+    .toast{
+      position:fixed;left:50%;bottom:18px;transform:translateX(-50%);
+      background:rgba(10,15,26,.86);border:1px solid rgba(255,255,255,.14);color:var(--text);
+      padding:10px 12px;border-radius:14px;box-shadow:0 18px 50px rgba(0,0,0,.45);backdrop-filter: blur(10px);
+      font-size:13px;opacity:0;pointer-events:none;transition: opacity .18s ease, transform .18s ease;
     }
-    .debug b{color:var(--text)}
-    .debug .row{margin-top:6px}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(-2px);}
     .footer{margin-top:18px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted2);font-size:12px;padding:8px 4px 0;}
-
-    @media (max-width: 920px){
-      .hero{grid-template-columns:1fr}
-      h2{font-size:30px}
-    }
+    @media (max-width: 980px){.hero{grid-template-columns:1fr}h2{font-size:32px}}
   </style>
 </head>
 
@@ -127,20 +99,18 @@
   <div class="wrap">
     <header>
       <a class="brand" href="./" aria-label="OrderCollector Pro home">
-        <!-- Put app_icon.png in the same folder as index.html -->
-        <img src="./app_icon.png" alt="OrderCollector Pro logo" class="logoImg"
-             onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='grid';" />
-        <div id="logoFallback" style="display:none;width:44px;height:44px;border-radius:14px;border:1px solid rgba(255,255,255,.18);background:linear-gradient(135deg,var(--accent),var(--accent2));place-items:center;box-shadow: 0 12px 30px rgba(110,168,255,.20);">
-          <span style="font-weight:800;color:#081225;">OC</span>
+        <div class="logoWrap" aria-hidden="true">
+          <img id="logoImg" src="./app_icon.png" alt="OrderCollector Pro logo" class="logoImg"
+               onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='grid';" />
+          <div id="logoFallback" class="logoFallback">OC</div>
         </div>
-
         <div>
           <h1>OrderCollector Pro 📦</h1>
           <p>Latest release download • Android APK</p>
         </div>
       </a>
 
-      <div class="pill" title="Release info status">
+      <div class="pill">
         <span class="dot" id="fetchDot"></span>
         <span id="fetchText">Loading latest release…</span>
       </div>
@@ -151,13 +121,13 @@
         <div class="kicker">
           <span class="tag">Flutter + Firebase</span>
           <span class="tag">Admin + Collector Roles</span>
-          <span class="tag">Free Plan Friendly</span>
+          <span class="tag">Material 3 UI</span>
         </div>
 
-        <h2>Download the latest<br/>OrderCollector Pro release.</h2>
+        <h2>Get the latest OrderCollector Pro.</h2>
         <p class="lead">
-          Grab the newest APK below and install it on your Android device.
-          This page auto-loads the latest version from <code class="inline">version.json</code>.
+          Download the newest APK and install it on your Android device. This page reads everything from
+          <code class="inline">version.json</code>.
         </p>
 
         <div class="ctaRow">
@@ -184,13 +154,6 @@
           <span id="forceFlag" class="flag req" style="display:none;">Force update required</span>
           <span>Updated:</span> <code class="inline" id="updatedAt">—</code>
         </div>
-
-        <div class="debug" id="debugBox" style="display:none;">
-          <b>Debug (version.json loading)</b>
-          <div class="row">Tried URLs:</div>
-          <div id="debugTried"></div>
-          <div class="row">Loaded from: <b id="debugLoadedFrom">—</b></div>
-        </div>
       </section>
 
       <aside class="card heroSide">
@@ -198,32 +161,32 @@
         <div class="stat"><div class="k">Platform</div><div class="v">Android (APK)</div></div>
         <div class="stat"><div class="k">Channel</div><div class="v">Latest</div></div>
 
-        <div class="notes">
+        <div class="box">
           <h3>Release Notes</h3>
           <pre id="notes">Loading…</pre>
         </div>
+
+        <div class="box">
+          <h3>Developer</h3>
+          <div class="devRow">
+            <div>
+              <div class="devName" id="devName">—</div>
+              <div class="devTag" id="devTag">—</div>
+            </div>
+          </div>
+
+          <div class="devLinks" id="devLinks" aria-label="Developer links"></div>
+        </div>
       </aside>
     </main>
-
-    <section class="card section">
-      <h3>How to install (Android)</h3>
-      <ol class="steps">
-        <li>Download the APK using the button above.</li>
-        <li>Open the downloaded file and tap <b>Install</b>.</li>
-        <li>If Android blocks it, enable <b>Install unknown apps</b> for your browser or file manager.</li>
-        <li>After installing, open the app and log in.</li>
-      </ol>
-
-      <div class="hint">
-        If the page shows an old version, hard refresh (Ctrl/Cmd + F5). This page also cache-busts <code class="inline">version.json</code>.
-      </div>
-    </section>
 
     <div class="footer">
       <div>© <span id="year"></span> OrderCollector Pro</div>
       <div>Release data: <span id="meta">—</span></div>
     </div>
   </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
     const els = {
@@ -239,12 +202,21 @@
       meta: document.getElementById("meta"),
       forceFlag: document.getElementById("forceFlag"),
       updatedAt: document.getElementById("updatedAt"),
-      debugBox: document.getElementById("debugBox"),
-      debugTried: document.getElementById("debugTried"),
-      debugLoadedFrom: document.getElementById("debugLoadedFrom")
+      toast: document.getElementById("toast"),
+
+      devName: document.getElementById("devName"),
+      devTag: document.getElementById("devTag"),
+      devLinks: document.getElementById("devLinks"),
     };
 
     els.year.textContent = new Date().getFullYear();
+
+    function toast(msg){
+      els.toast.textContent = msg;
+      els.toast.classList.add("show");
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(()=>els.toast.classList.remove("show"), 1500);
+    }
 
     function setStatus(state, text){
       els.fetchText.textContent = text;
@@ -256,57 +228,35 @@
     function safeText(v){ return (v === null || v === undefined) ? "—" : String(v); }
 
     function addCacheBuster(url){
-      try{
-        const u = new URL(url, window.location.href);
-        u.searchParams.set("v", Date.now());
-        return u.toString();
-      }catch{
-        return url + (url.includes("?") ? "&" : "?") + "v=" + Date.now();
-      }
+      const u = new URL(url, window.location.href);
+      u.searchParams.set("v", Date.now());
+      return u.toString();
     }
 
-    async function fetchJsonWithFallbacks(){
-      const tried = [];
-
-      // A) Best for GitHub Pages: relative to current page (repo subpath safe)
-      tried.push(addCacheBuster(new URL("./version.json", window.location.href).toString()));
-
-      // B) Relative to document.baseURI
-      const b = addCacheBuster(new URL("version.json", document.baseURI).toString());
-      if (!tried.includes(b)) tried.push(b);
-
-      // C) origin + current directory
-      const pathDir = window.location.pathname.replace(/[^\/]*$/, "");
-      const c = addCacheBuster(window.location.origin + pathDir + "version.json");
-      if (!tried.includes(c)) tried.push(c);
-
-      // Show debug so you can confirm what URL is being used
-      els.debugBox.style.display = "block";
-      els.debugTried.innerHTML = tried.map(u => `<div class="row">• ${u}</div>`).join("");
-
-      let lastErr = null;
-      for (const url of tried){
-        try{
-          const res = await fetch(url, { cache: "no-store" });
-          if(!res.ok) throw new Error(`HTTP ${res.status}`);
-          const data = await res.json();
-          els.debugLoadedFrom.textContent = url;
-          return data;
-        }catch(e){
-          lastErr = e;
-        }
-      }
-      throw lastErr || new Error("Could not load version.json");
+    async function fetchJson(){
+      const url = addCacheBuster(new URL("./version.json", window.location.href).toString());
+      const res = await fetch(url, { cache: "no-store" });
+      if(!res.ok) throw new Error(`HTTP ${res.status}`);
+      return await res.json();
     }
 
-    function isGoogleDriveUc(url){
-      return /docs\.google\.com\/uc\?export=download&id=/.test(url || "");
+    function addDevLink(label, href){
+      if (!href) return;
+      const a = document.createElement("a");
+      a.className = "chip";
+      a.href = href;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.textContent = label;
+      els.devLinks.appendChild(a);
     }
 
     async function loadVersion(){
       try{
-        const data = await fetchJsonWithFallbacks();
+        setStatus("warn", "Loading latest release…");
+        const data = await fetchJson();
 
+        // Release
         const version = safeText(data.version);
         const buildNumber = safeText(data.buildNumber);
         const downloadUrl = safeText(data.downloadUrl);
@@ -314,51 +264,47 @@
         const forceUpdate = !!data.forceUpdate;
         const updatedAt = safeText(data.updatedAt);
 
-        // Render
         els.ver.textContent = version;
         els.build.textContent = buildNumber;
         els.updatedAt.textContent = updatedAt !== "—" ? updatedAt : new Date().toUTCString();
         els.notes.textContent = releaseNotes;
 
-        // Force update badge
         els.forceFlag.style.display = forceUpdate ? "inline-flex" : "none";
 
-        // Buttons
         if (downloadUrl && downloadUrl !== "—") {
           els.downloadBtn.href = downloadUrl;
-          els.downloadBtn.setAttribute("aria-disabled","false");
-
           els.openLinkBtn.href = downloadUrl;
+          els.downloadBtn.setAttribute("aria-disabled","false");
           els.openLinkBtn.setAttribute("aria-disabled","false");
 
           els.copyLinkBtn.disabled = false;
           els.copyLinkBtn.onclick = async () => {
             try{
               await navigator.clipboard.writeText(downloadUrl);
-              els.copyLinkBtn.textContent = "Copied ✓";
-              setTimeout(() => els.copyLinkBtn.textContent = "Copy download link", 1400);
+              toast("Copied ✓");
             }catch{
               prompt("Copy this link:", downloadUrl);
             }
           };
-
-          // Subtle console guidance for Drive link edge cases
-          if (isGoogleDriveUc(downloadUrl)) {
-            console.info("Google Drive direct download link detected. If users see a confirm page, consider hosting APK in GitHub Releases for smoother installs.");
-          }
         }
 
         els.meta.textContent = `v${version} (build ${buildNumber})`;
+
+        // Developer (from JSON)
+        const dev = data.developer || {};
+        els.devName.textContent = safeText(dev.name);
+        els.devTag.textContent = [dev.role, dev.tagline].filter(Boolean).join(" • ") || "—";
+
+        // Render links (only if present)
+        els.devLinks.innerHTML = "";
+        addDevLink("GitHub", dev.github || dev.website);
+        addDevLink("Website", dev.website);
+        addDevLink("Telegram", dev.telegram);
+        addDevLink("Email", dev.email ? `mailto:${dev.email}` : "");
+
         setStatus("ok", "Latest release loaded");
       }catch(err){
-        els.notes.textContent =
-`Could not load version.json.
-
-Fix:
-• Ensure version.json is in the SAME folder as index.html
-• GitHub Pages must publish that same folder
-• Open version.json in browser to confirm it loads (no 404)
-• Hard refresh (Ctrl/Cmd + F5)`;
+        els.notes.textContent = "Could not load release info. Please refresh the page.";
         setStatus("err", "Failed to load release info");
         els.meta.textContent = "Not available";
         console.error(err);
