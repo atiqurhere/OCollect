@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#0b1220" />
   <title>OrderCollector Pro — Download</title>
-  <meta name="description" content="Download the latest release of OrderCollector Pro — a production-ready Flutter + Firebase order collection app." />
+  <meta name="description" content="Download the latest release of OrderCollector Pro — a production-ready order collection app." />
 
   <style>
     :root{
@@ -43,17 +43,16 @@
 
     header{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 0 18px;}
     .brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
-    .logo{width:44px;height:44px;border-radius:14px;background:
-      radial-gradient(20px 20px at 30% 30%, rgba(255,255,255,.45), transparent 60%),
-      linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 12px 30px rgba(110,168,255,.20);
+    .logoImg{
+      width:44px;height:44px;border-radius:14px;
       border:1px solid rgba(255,255,255,.18);
-      position:relative;overflow:hidden;}
-    .logo:after{content:"";position:absolute; inset:-30px;background: linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent);
-      transform: rotate(25deg);animation: shine 5.5s linear infinite;}
-    @keyframes shine{0%{transform:translateX(-40%) rotate(25deg)}100%{transform:translateX(40%) rotate(25deg)}}
+      box-shadow: 0 12px 30px rgba(110,168,255,.20);
+      object-fit:cover;
+      background: rgba(255,255,255,.06);
+    }
     .brand h1{margin:0;font-size:16px;letter-spacing:.2px;line-height:1.1;}
     .brand p{margin:2px 0 0;font-size:12px;color:var(--muted2);}
+
     .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--muted);font-size:12px;white-space:nowrap;}
     .dot{width:8px;height:8px;border-radius:50%;background:var(--warn);box-shadow:0 0 0 4px rgba(245,158,11,.15);}
     .dot.ok{background:var(--ok);box-shadow:0 0 0 4px rgba(34,197,94,.15);}
@@ -83,6 +82,9 @@
     .btnSmall{padding:10px 12px;border-radius:12px;font-size:13px;min-height:40px;}
     .icon{width:18px;height:18px; display:inline-block;}
 
+    .statusLine{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:12px;margin-top:8px;flex-wrap:wrap}
+    code.inline{background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.10);padding:2px 7px;border-radius:999px;color:var(--text);font-size:12px;}
+
     .heroSide{padding:18px 18px;display:flex;flex-direction:column;gap:12px;}
     .stat{display:flex;justify-content:space-between;gap:10px;padding:12px 12px;border-radius:16px;background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.10);}
     .stat .k{color:var(--muted2);font-size:12px;}
@@ -94,24 +96,29 @@
     .notes h3{margin:0 0 8px;font-size:13px;letter-spacing:.2px;color:var(--muted);font-weight:700;}
     .notes pre{margin:0;white-space:pre-wrap;word-wrap:break-word;font-family: var(--font);color: var(--text);font-size:13px;line-height:1.55;}
 
-    .grid{display:grid;grid-template-columns: repeat(3, 1fr);gap:14px;margin-top:18px;}
-    .mini{padding:16px 16px;border-radius:22px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);}
-    .mini h4{margin:0 0 6px;font-size:14px;letter-spacing:.1px;}
-    .mini p{margin:0;color:var(--muted);font-size:13px;line-height:1.6;}
-
     .section{margin-top:18px;padding:18px;}
     .section h3{margin:0 0 10px;font-size:16px;}
     .steps{margin:0;padding-left:18px;color:var(--muted);line-height:1.8;font-size:13px;}
+
     .hint{margin-top:12px;padding:12px 12px;border-radius:16px;border:1px dashed rgba(255,255,255,.16);color:var(--muted);font-size:12px;line-height:1.6;background:rgba(255,255,255,.04);}
 
+    .debug{
+      margin-top:12px;
+      padding:12px;
+      border-radius:16px;
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.10);
+      color: var(--muted);
+      font-size:12px;
+      line-height:1.55;
+    }
+    .debug b{color:var(--text)}
+    .debug .row{margin-top:6px}
     .footer{margin-top:18px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted2);font-size:12px;padding:8px 4px 0;}
-    .statusLine{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:12px;margin-top:8px;flex-wrap:wrap}
-    code.inline{background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.10);padding:2px 7px;border-radius:999px;color:var(--text);font-size:12px;}
 
     @media (max-width: 920px){
       .hero{grid-template-columns:1fr}
       h2{font-size:30px}
-      .grid{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -119,15 +126,21 @@
 <body>
   <div class="wrap">
     <header>
-      <a class="brand" href="./">
-        <div class="logo" aria-hidden="true"></div>
+      <a class="brand" href="./" aria-label="OrderCollector Pro home">
+        <!-- Put app_icon.png in the same folder as index.html -->
+        <img src="./app_icon.png" alt="OrderCollector Pro logo" class="logoImg"
+             onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='grid';" />
+        <div id="logoFallback" style="display:none;width:44px;height:44px;border-radius:14px;border:1px solid rgba(255,255,255,.18);background:linear-gradient(135deg,var(--accent),var(--accent2));place-items:center;box-shadow: 0 12px 30px rgba(110,168,255,.20);">
+          <span style="font-weight:800;color:#081225;">OC</span>
+        </div>
+
         <div>
           <h1>OrderCollector Pro 📦</h1>
           <p>Latest release download • Android APK</p>
         </div>
       </a>
 
-      <div class="pill" id="fetchPill" title="Release info status">
+      <div class="pill" title="Release info status">
         <span class="dot" id="fetchDot"></span>
         <span id="fetchText">Loading latest release…</span>
       </div>
@@ -136,15 +149,14 @@
     <main class="hero">
       <section class="card heroMain">
         <div class="kicker">
-          <span class="tag">Flutter + Firebase</span>
           <span class="tag">Admin + Collector Roles</span>
           <span class="tag">Free Plan Friendly</span>
         </div>
 
         <h2>Download the latest<br/>OrderCollector Pro release.</h2>
         <p class="lead">
-          A production-ready order collection system for stores — built with Flutter, Firebase Auth, and Cloud Firestore.
           Grab the newest APK below and install it on your Android device.
+          This page auto-loads the latest version from <code class="inline">version.json</code>.
         </p>
 
         <div class="ctaRow">
@@ -156,8 +168,8 @@
             Download APK
           </a>
 
-          <a class="btn btnGhost" id="releaseLink" href="#" rel="noopener" target="_blank" aria-disabled="true">
-            View Release
+          <a class="btn btnGhost" id="openLinkBtn" href="#" rel="noopener" target="_blank" aria-disabled="true">
+            Open download link
           </a>
 
           <button class="btn btnGhost btnSmall" id="copyLinkBtn" type="button" disabled>
@@ -170,29 +182,20 @@
           <span>Build:</span> <code class="inline" id="build">—</code>
           <span id="forceFlag" class="flag req" style="display:none;">Force update required</span>
           <span>Updated:</span> <code class="inline" id="updatedAt">—</code>
-          <span>Source:</span> <code class="inline">version.json</code>
         </div>
 
-        <div class="grid">
-          <div class="mini">
-            <h4>Fast install</h4>
-            <p>One click download, then install the APK on Android.</p>
-          </div>
-          <div class="mini">
-            <h4>Reliable updates</h4>
-            <p>This page automatically reads the newest release from <code class="inline">version.json</code>.</p>
-          </div>
-          <div class="mini">
-            <h4>Clean release notes</h4>
-            <p>What changed is displayed directly here, no extra scrolling.</p>
-          </div>
+        <div class="debug" id="debugBox" style="display:none;">
+          <b>Debug (version.json loading)</b>
+          <div class="row">Tried URLs:</div>
+          <div id="debugTried"></div>
+          <div class="row">Loaded from: <b id="debugLoadedFrom">—</b></div>
         </div>
       </section>
 
       <aside class="card heroSide">
         <div class="stat"><div class="k">App</div><div class="v">OrderCollector Pro</div></div>
         <div class="stat"><div class="k">Platform</div><div class="v">Android (APK)</div></div>
-        <div class="stat"><div class="k">Channel</div><div class="v">Latest Release</div></div>
+        <div class="stat"><div class="k">Channel</div><div class="v">Latest</div></div>
 
         <div class="notes">
           <h3>Release Notes</h3>
@@ -207,17 +210,17 @@
         <li>Download the APK using the button above.</li>
         <li>Open the downloaded file and tap <b>Install</b>.</li>
         <li>If Android blocks it, enable <b>Install unknown apps</b> for your browser or file manager.</li>
-        <li>After installing, open the app and log in with your provided account.</li>
+        <li>After installing, open the app and log in.</li>
       </ol>
 
       <div class="hint">
-        Tip: If GitHub Pages caches an old version, hard refresh (Ctrl/Cmd+F5). This page adds a cache-busting query to <code class="inline">version.json</code> automatically.
+        If the page shows an old version, hard refresh (Ctrl/Cmd + F5). This page also cache-busts <code class="inline">version.json</code>.
       </div>
     </section>
 
     <div class="footer">
       <div>© <span id="year"></span> OrderCollector Pro</div>
-      <div id="footerMeta">Release data: <span id="meta">—</span></div>
+      <div>Release data: <span id="meta">—</span></div>
     </div>
   </div>
 
@@ -227,20 +230,22 @@
       build: document.getElementById("build"),
       notes: document.getElementById("notes"),
       downloadBtn: document.getElementById("downloadBtn"),
-      releaseLink: document.getElementById("releaseLink"),
+      openLinkBtn: document.getElementById("openLinkBtn"),
       copyLinkBtn: document.getElementById("copyLinkBtn"),
       fetchText: document.getElementById("fetchText"),
       fetchDot: document.getElementById("fetchDot"),
       year: document.getElementById("year"),
       meta: document.getElementById("meta"),
       forceFlag: document.getElementById("forceFlag"),
-      updatedAt: document.getElementById("updatedAt")
+      updatedAt: document.getElementById("updatedAt"),
+      debugBox: document.getElementById("debugBox"),
+      debugTried: document.getElementById("debugTried"),
+      debugLoadedFrom: document.getElementById("debugLoadedFrom")
     };
 
     els.year.textContent = new Date().getFullYear();
 
     function setStatus(state, text){
-      // state: "ok" | "warn" | "err"
       els.fetchText.textContent = text;
       els.fetchDot.classList.remove("ok","err");
       if (state === "ok") els.fetchDot.classList.add("ok");
@@ -249,28 +254,57 @@
 
     function safeText(v){ return (v === null || v === undefined) ? "—" : String(v); }
 
-    function guessReleasePage(downloadUrl){
-      // https://github.com/<owner>/<repo>/releases/download/<tag>/<file> -> /releases/tag/<tag>
-      try {
-        const u = new URL(downloadUrl);
-        const parts = u.pathname.split("/").filter(Boolean);
-        const idx = parts.indexOf("download");
-        if (idx !== -1 && parts[idx + 1]) {
-          const tag = parts[idx + 1];
-          return `${u.origin}/${parts[0]}/${parts[1]}/releases/tag/${tag}`;
+    function addCacheBuster(url){
+      try{
+        const u = new URL(url, window.location.href);
+        u.searchParams.set("v", Date.now());
+        return u.toString();
+      }catch{
+        return url + (url.includes("?") ? "&" : "?") + "v=" + Date.now();
+      }
+    }
+
+    async function fetchJsonWithFallbacks(){
+      const tried = [];
+
+      // A) Best for GitHub Pages: relative to current page (repo subpath safe)
+      tried.push(addCacheBuster(new URL("./version.json", window.location.href).toString()));
+
+      // B) Relative to document.baseURI
+      const b = addCacheBuster(new URL("version.json", document.baseURI).toString());
+      if (!tried.includes(b)) tried.push(b);
+
+      // C) origin + current directory
+      const pathDir = window.location.pathname.replace(/[^\/]*$/, "");
+      const c = addCacheBuster(window.location.origin + pathDir + "version.json");
+      if (!tried.includes(c)) tried.push(c);
+
+      // Show debug so you can confirm what URL is being used
+      els.debugBox.style.display = "block";
+      els.debugTried.innerHTML = tried.map(u => `<div class="row">• ${u}</div>`).join("");
+
+      let lastErr = null;
+      for (const url of tried){
+        try{
+          const res = await fetch(url, { cache: "no-store" });
+          if(!res.ok) throw new Error(`HTTP ${res.status}`);
+          const data = await res.json();
+          els.debugLoadedFrom.textContent = url;
+          return data;
+        }catch(e){
+          lastErr = e;
         }
-      } catch (_) {}
-      return downloadUrl;
+      }
+      throw lastErr || new Error("Could not load version.json");
+    }
+
+    function isGoogleDriveUc(url){
+      return /docs\.google\.com\/uc\?export=download&id=/.test(url || "");
     }
 
     async function loadVersion(){
       try{
-        // ✅ Relative to current page — works on repo subpaths
-        const vurl = new URL("./version.json", window.location.href);
-        vurl.searchParams.set("v", Date.now());
-        const res = await fetch(vurl.toString(), { cache: "no-store" });
-        if(!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
+        const data = await fetchJsonWithFallbacks();
 
         const version = safeText(data.version);
         const buildNumber = safeText(data.buildNumber);
@@ -279,34 +313,38 @@
         const forceUpdate = !!data.forceUpdate;
         const updatedAt = safeText(data.updatedAt);
 
+        // Render
         els.ver.textContent = version;
         els.build.textContent = buildNumber;
         els.updatedAt.textContent = updatedAt !== "—" ? updatedAt : new Date().toUTCString();
         els.notes.textContent = releaseNotes;
 
-        // Buttons & links
+        // Force update badge
+        els.forceFlag.style.display = forceUpdate ? "inline-flex" : "none";
+
+        // Buttons
         if (downloadUrl && downloadUrl !== "—") {
           els.downloadBtn.href = downloadUrl;
           els.downloadBtn.setAttribute("aria-disabled","false");
-          els.releaseLink.href = guessReleasePage(downloadUrl);
-          els.releaseLink.setAttribute("aria-disabled","false");
-          els.copyLinkBtn.disabled = false;
 
-          els.copyLinkBtn.addEventListener("click", async () => {
+          els.openLinkBtn.href = downloadUrl;
+          els.openLinkBtn.setAttribute("aria-disabled","false");
+
+          els.copyLinkBtn.disabled = false;
+          els.copyLinkBtn.onclick = async () => {
             try{
               await navigator.clipboard.writeText(downloadUrl);
               els.copyLinkBtn.textContent = "Copied ✓";
               setTimeout(() => els.copyLinkBtn.textContent = "Copy download link", 1400);
-            }catch(e){
+            }catch{
               prompt("Copy this link:", downloadUrl);
             }
-          });
-        }
+          };
 
-        // Force update badge
-        if (forceUpdate) {
-          els.forceFlag.style.display = "inline-flex";
-          els.forceFlag.title = "This update is required.";
+          // Subtle console guidance for Drive link edge cases
+          if (isGoogleDriveUc(downloadUrl)) {
+            console.info("Google Drive direct download link detected. If users see a confirm page, consider hosting APK in GitHub Releases for smoother installs.");
+          }
         }
 
         els.meta.textContent = `v${version} (build ${buildNumber})`;
@@ -316,10 +354,10 @@
 `Could not load version.json.
 
 Fix:
-• Ensure version.json exists next to index.html
-• If using GitHub Pages, publish from the same branch/folder
-• Check JSON syntax
-• If using a repo site (username.github.io/repo), keep the relative path`;
+• Ensure version.json is in the SAME folder as index.html
+• GitHub Pages must publish that same folder
+• Open version.json in browser to confirm it loads (no 404)
+• Hard refresh (Ctrl/Cmd + F5)`;
         setStatus("err", "Failed to load release info");
         els.meta.textContent = "Not available";
         console.error(err);
