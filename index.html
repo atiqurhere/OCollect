@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#0b1220" />
   <title>OrderCollector Pro — Download</title>
-  <meta name="description" content="Download the latest release of OrderCollector Pro — a production-ready collection app." />
+  <meta name="description" content="Download the latest release of OrderCollector Pro — a production-ready Flutter + Firebase order collection app." />
 
   <style>
     :root{
@@ -99,6 +99,7 @@
     .section{margin-top:18px;padding:18px;}
     .section h3{margin:0 0 10px;font-size:16px;}
     .steps{margin:0;padding-left:18px;color:var(--muted);line-height:1.8;font-size:13px;}
+
     .hint{margin-top:12px;padding:12px 12px;border-radius:16px;border:1px dashed rgba(255,255,255,.16);color:var(--muted);font-size:12px;line-height:1.6;background:rgba(255,255,255,.04);}
 
     .debug{
@@ -113,9 +114,6 @@
     }
     .debug b{color:var(--text)}
     .debug .row{margin-top:6px}
-    .debug .ok{color:rgba(34,197,94,.95)}
-    .debug .err{color:rgba(239,68,68,.95)}
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;}
     .footer{margin-top:18px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted2);font-size:12px;padding:8px 4px 0;}
 
     @media (max-width: 920px){
@@ -129,6 +127,7 @@
   <div class="wrap">
     <header>
       <a class="brand" href="./" aria-label="OrderCollector Pro home">
+        <!-- Put app_icon.png in the same folder as index.html -->
         <img src="./app_icon.png" alt="OrderCollector Pro logo" class="logoImg"
              onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='grid';" />
         <div id="logoFallback" style="display:none;width:44px;height:44px;border-radius:14px;border:1px solid rgba(255,255,255,.18);background:linear-gradient(135deg,var(--accent),var(--accent2));place-items:center;box-shadow: 0 12px 30px rgba(110,168,255,.20);">
@@ -150,13 +149,15 @@
     <main class="hero">
       <section class="card heroMain">
         <div class="kicker">
+          <span class="tag">Flutter + Firebase</span>
           <span class="tag">Admin + Collector Roles</span>
           <span class="tag">Free Plan Friendly</span>
         </div>
 
         <h2>Download the latest<br/>OrderCollector Pro release.</h2>
         <p class="lead">
-          This page auto-loads the latest release from <code class="inline">version.json</code> and shows the newest APK.
+          Grab the newest APK below and install it on your Android device.
+          This page auto-loads the latest version from <code class="inline">version.json</code>.
         </p>
 
         <div class="ctaRow">
@@ -184,19 +185,11 @@
           <span>Updated:</span> <code class="inline" id="updatedAt">—</code>
         </div>
 
-        <div class="debug" id="debugBox">
-          <b>Debug (why JSON isn’t loading)</b>
+        <div class="debug" id="debugBox" style="display:none;">
+          <b>Debug (version.json loading)</b>
           <div class="row">Tried URLs:</div>
           <div id="debugTried"></div>
-          <div class="row">Success URL: <b id="debugLoadedFrom">—</b></div>
-          <div class="row">Last error: <span id="debugLastError" class="err">—</span></div>
-          <div class="row">Last response preview:</div>
-          <div class="row mono" id="debugBody" style="opacity:.9;white-space:pre-wrap;word-break:break-word;">—</div>
-        </div>
-
-        <div class="hint">
-          Pro tip: open <code class="inline">version.json</code> directly in your browser. If it shows a 404 page (HTML),
-          GitHub Pages isn’t publishing it from the folder/branch you think.
+          <div class="row">Loaded from: <b id="debugLoadedFrom">—</b></div>
         </div>
       </section>
 
@@ -220,6 +213,10 @@
         <li>If Android blocks it, enable <b>Install unknown apps</b> for your browser or file manager.</li>
         <li>After installing, open the app and log in.</li>
       </ol>
+
+      <div class="hint">
+        If the page shows an old version, hard refresh (Ctrl/Cmd + F5). This page also cache-busts <code class="inline">version.json</code>.
+      </div>
     </section>
 
     <div class="footer">
@@ -242,10 +239,9 @@
       meta: document.getElementById("meta"),
       forceFlag: document.getElementById("forceFlag"),
       updatedAt: document.getElementById("updatedAt"),
+      debugBox: document.getElementById("debugBox"),
       debugTried: document.getElementById("debugTried"),
-      debugLoadedFrom: document.getElementById("debugLoadedFrom"),
-      debugLastError: document.getElementById("debugLastError"),
-      debugBody: document.getElementById("debugBody"),
+      debugLoadedFrom: document.getElementById("debugLoadedFrom")
     };
 
     els.year.textContent = new Date().getFullYear();
@@ -259,98 +255,57 @@
 
     function safeText(v){ return (v === null || v === undefined) ? "—" : String(v); }
 
-    function cacheBust(url){
-      const u = new URL(url, window.location.href);
-      u.searchParams.set("v", Date.now());
-      return u.toString();
-    }
-
-    function getOwnerRepoFromPages(){
-      // For project pages: https://<owner>.github.io/<repo>/
-      const host = location.hostname; // owner.github.io
-      const owner = host.endsWith(".github.io") ? host.replace(".github.io","") : null;
-      const pathParts = location.pathname.split("/").filter(Boolean);
-      const repo = pathParts.length ? pathParts[0] : null;
-      return { owner, repo };
-    }
-
-    async function tryFetchJson(url){
-      // returns {ok, data, status, text}
-      const res = await fetch(url, { cache: "no-store" });
-      const status = res.status;
-      const text = await res.text();
-      if (!res.ok) return { ok:false, status, text };
+    function addCacheBuster(url){
       try{
-        return { ok:true, status, data: JSON.parse(text), text };
+        const u = new URL(url, window.location.href);
+        u.searchParams.set("v", Date.now());
+        return u.toString();
       }catch{
-        return { ok:false, status, text };
+        return url + (url.includes("?") ? "&" : "?") + "v=" + Date.now();
       }
     }
 
-    async function fetchVersionJsonRobust(){
+    async function fetchJsonWithFallbacks(){
       const tried = [];
-      const errors = [];
 
-      const { owner, repo } = getOwnerRepoFromPages();
+      // A) Best for GitHub Pages: relative to current page (repo subpath safe)
+      tried.push(addCacheBuster(new URL("./version.json", window.location.href).toString()));
 
-      // 1) Same folder as index.html (best practice)
-      tried.push(cacheBust(new URL("./version.json", location.href).toString()));
+      // B) Relative to document.baseURI
+      const b = addCacheBuster(new URL("version.json", document.baseURI).toString());
+      if (!tried.includes(b)) tried.push(b);
 
-      // 2) Repo root under Pages (same as above usually, but keep)
-      tried.push(cacheBust(new URL("version.json", location.href).toString()));
+      // C) origin + current directory
+      const pathDir = window.location.pathname.replace(/[^\/]*$/, "");
+      const c = addCacheBuster(window.location.origin + pathDir + "version.json");
+      if (!tried.includes(c)) tried.push(c);
 
-      // 3) Absolute Pages project path: /<repo>/version.json
-      if (repo) tried.push(cacheBust(`${location.origin}/${repo}/version.json`));
-
-      // 4) Raw GitHub fallbacks (works even if Pages isn’t publishing JSON)
-      // Try common branches: main, master, gh-pages
-      if (owner && repo){
-        for (const br of ["main","master","gh-pages"]){
-          tried.push(cacheBust(`https://raw.githubusercontent.com/${owner}/${repo}/${br}/version.json`));
-        }
-        // If your Pages is from /docs, try /docs/version.json too:
-        for (const br of ["main","master","gh-pages"]){
-          tried.push(cacheBust(`https://raw.githubusercontent.com/${owner}/${repo}/${br}/docs/version.json`));
-        }
-      }
-
-      // Render tried list
+      // Show debug so you can confirm what URL is being used
+      els.debugBox.style.display = "block";
       els.debugTried.innerHTML = tried.map(u => `<div class="row">• ${u}</div>`).join("");
 
-      let last = null;
-
+      let lastErr = null;
       for (const url of tried){
         try{
-          const r = await tryFetchJson(url);
-          if (r.ok){
-            els.debugLoadedFrom.textContent = url;
-            els.debugLastError.textContent = "—";
-            els.debugBody.textContent = "—";
-            return r.data;
-          } else {
-            last = r;
-            errors.push({ url, ...r });
-          }
+          const res = await fetch(url, { cache: "no-store" });
+          if(!res.ok) throw new Error(`HTTP ${res.status}`);
+          const data = await res.json();
+          els.debugLoadedFrom.textContent = url;
+          return data;
         }catch(e){
-          last = { status: "ERR", text: String(e) };
-          errors.push({ url, status: "ERR", text: String(e) });
+          lastErr = e;
         }
       }
+      throw lastErr || new Error("Could not load version.json");
+    }
 
-      // Show last error details
-      const lastErr = errors[errors.length - 1];
-      if (lastErr){
-        els.debugLastError.textContent = `URL: ${lastErr.url} | Status: ${lastErr.status}`;
-        els.debugBody.textContent = (lastErr.text || "").slice(0, 600) || "—";
-      }
-
-      throw new Error("All fetch attempts failed");
+    function isGoogleDriveUc(url){
+      return /docs\.google\.com\/uc\?export=download&id=/.test(url || "");
     }
 
     async function loadVersion(){
       try{
-        setStatus("warn","Loading latest release…");
-        const data = await fetchVersionJsonRobust();
+        const data = await fetchJsonWithFallbacks();
 
         const version = safeText(data.version);
         const buildNumber = safeText(data.buildNumber);
@@ -359,12 +314,16 @@
         const forceUpdate = !!data.forceUpdate;
         const updatedAt = safeText(data.updatedAt);
 
+        // Render
         els.ver.textContent = version;
         els.build.textContent = buildNumber;
         els.updatedAt.textContent = updatedAt !== "—" ? updatedAt : new Date().toUTCString();
         els.notes.textContent = releaseNotes;
+
+        // Force update badge
         els.forceFlag.style.display = forceUpdate ? "inline-flex" : "none";
 
+        // Buttons
         if (downloadUrl && downloadUrl !== "—") {
           els.downloadBtn.href = downloadUrl;
           els.downloadBtn.setAttribute("aria-disabled","false");
@@ -382,21 +341,26 @@
               prompt("Copy this link:", downloadUrl);
             }
           };
+
+          // Subtle console guidance for Drive link edge cases
+          if (isGoogleDriveUc(downloadUrl)) {
+            console.info("Google Drive direct download link detected. If users see a confirm page, consider hosting APK in GitHub Releases for smoother installs.");
+          }
         }
 
         els.meta.textContent = `v${version} (build ${buildNumber})`;
-        setStatus("ok","Latest release loaded");
+        setStatus("ok", "Latest release loaded");
       }catch(err){
         els.notes.textContent =
 `Could not load version.json.
 
-What to check:
-• version.json must be committed (not just local)
-• GitHub Pages must publish the folder containing version.json
-• File name must be exactly: version.json (lowercase)
-• Try opening: /OCollect/version.json directly in browser`;
+Fix:
+• Ensure version.json is in the SAME folder as index.html
+• GitHub Pages must publish that same folder
+• Open version.json in browser to confirm it loads (no 404)
+• Hard refresh (Ctrl/Cmd + F5)`;
+        setStatus("err", "Failed to load release info");
         els.meta.textContent = "Not available";
-        setStatus("err","Failed to load release info");
         console.error(err);
       }
     }
