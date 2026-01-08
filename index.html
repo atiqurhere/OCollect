@@ -20,11 +20,11 @@
       --accent2:#8b5cf6;
       --ok:#22c55e;
       --warn:#f59e0b;
+      --error:#ef4444;
       --shadow: 0 20px 60px rgba(0,0,0,.45);
       --radius: 22px;
       --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
     }
-
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -38,313 +38,75 @@
         linear-gradient(180deg, var(--bg0), var(--bg1));
       overflow-x:hidden;
     }
-
     a{color:inherit}
-    .wrap{
-      max-width:1100px;
-      margin:0 auto;
-      padding:28px 18px 64px;
-    }
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 18px 64px;}
 
-    header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      padding:10px 0 18px;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      text-decoration:none;
-    }
-    .logo{
-      width:44px;height:44px;
-      border-radius:14px;
-      background:
-        radial-gradient(20px 20px at 30% 30%, rgba(255,255,255,.45), transparent 60%),
-        linear-gradient(135deg, var(--accent), var(--accent2));
+    header{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 0 18px;}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
+    .logo{width:44px;height:44px;border-radius:14px;background:
+      radial-gradient(20px 20px at 30% 30%, rgba(255,255,255,.45), transparent 60%),
+      linear-gradient(135deg, var(--accent), var(--accent2));
       box-shadow: 0 12px 30px rgba(110,168,255,.20);
       border:1px solid rgba(255,255,255,.18);
-      position:relative;
-      overflow:hidden;
-    }
-    .logo:after{
-      content:"";
-      position:absolute; inset:-30px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent);
-      transform: rotate(25deg);
-      animation: shine 5.5s linear infinite;
-    }
-    @keyframes shine{
-      0%{transform:translateX(-40%) rotate(25deg)}
-      100%{transform:translateX(40%) rotate(25deg)}
-    }
-    .brand h1{
-      margin:0;
-      font-size:16px;
-      letter-spacing:.2px;
-      line-height:1.1;
-    }
-    .brand p{
-      margin:2px 0 0;
-      font-size:12px;
-      color:var(--muted2);
-    }
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 12px;
-      border-radius:999px;
-      background:rgba(255,255,255,.06);
-      border:1px solid var(--border);
-      color:var(--muted);
-      font-size:12px;
-      white-space:nowrap;
-    }
-    .dot{
-      width:8px;height:8px;border-radius:50%;
-      background:var(--warn);
-      box-shadow:0 0 0 4px rgba(245,158,11,.15);
-    }
-    .dot.ok{
-      background:var(--ok);
-      box-shadow:0 0 0 4px rgba(34,197,94,.15);
-    }
+      position:relative;overflow:hidden;}
+    .logo:after{content:"";position:absolute; inset:-30px;background: linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent);
+      transform: rotate(25deg);animation: shine 5.5s linear infinite;}
+    @keyframes shine{0%{transform:translateX(-40%) rotate(25deg)}100%{transform:translateX(40%) rotate(25deg)}}
+    .brand h1{margin:0;font-size:16px;letter-spacing:.2px;line-height:1.1;}
+    .brand p{margin:2px 0 0;font-size:12px;color:var(--muted2);}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--muted);font-size:12px;white-space:nowrap;}
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--warn);box-shadow:0 0 0 4px rgba(245,158,11,.15);}
+    .dot.ok{background:var(--ok);box-shadow:0 0 0 4px rgba(34,197,94,.15);}
+    .dot.err{background:var(--error);box-shadow:0 0 0 4px rgba(239,68,68,.18);}
 
-    .hero{
-      display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap:18px;
-      align-items:stretch;
-      margin-top:10px;
-    }
+    .hero{display:grid;grid-template-columns: 1.25fr .75fr;gap:18px;align-items:stretch;margin-top:10px;}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);backdrop-filter: blur(10px);}
 
-    .card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      backdrop-filter: blur(10px);
-    }
-
-    .heroMain{
-      padding:26px 22px;
-      position:relative;
-      overflow:hidden;
-    }
-    .heroMain:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(600px 220px at 15% 0%, rgba(110,168,255,.22), transparent 60%),
-        radial-gradient(600px 240px at 85% 0%, rgba(139,92,246,.18), transparent 60%);
-      pointer-events:none;
-    }
+    .heroMain{padding:26px 22px;position:relative;overflow:hidden;}
+    .heroMain:before{content:"";position:absolute; inset:-2px;background:
+      radial-gradient(600px 220px at 15% 0%, rgba(110,168,255,.22), transparent 60%),
+      radial-gradient(600px 240px at 85% 0%, rgba(139,92,246,.18), transparent 60%);pointer-events:none;}
     .heroMain > *{position:relative}
 
-    .kicker{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      margin-bottom:10px;
-    }
-    .tag{
-      font-size:12px;
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.06);
-      color:var(--muted);
-    }
+    .kicker{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:10px;}
+    .tag{font-size:12px;padding:7px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:var(--muted);}
+    h2{margin:10px 0 8px;font-size:34px;letter-spacing:-.6px;line-height:1.06;}
+    .lead{margin:0 0 16px;color:var(--muted);font-size:14px;line-height:1.6;max-width:62ch;}
 
-    h2{
-      margin:10px 0 8px;
-      font-size:34px;
-      letter-spacing:-.6px;
-      line-height:1.06;
-    }
-    .lead{
-      margin:0 0 16px;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.6;
-      max-width:62ch;
-    }
-
-    .ctaRow{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      align-items:center;
-      margin-top:14px;
-    }
-    .btn{
-      appearance:none;
-      border:none;
-      cursor:pointer;
-      border-radius:14px;
-      padding:12px 14px;
-      font-weight:650;
-      letter-spacing:.2px;
-      font-size:14px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      text-decoration:none;
-      transition: transform .12s ease, filter .12s ease, background .12s ease;
-      user-select:none;
-      min-height:44px;
-    }
+    .ctaRow{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:14px;}
+    .btn{appearance:none;border:none;cursor:pointer;border-radius:14px;padding:12px 14px;font-weight:650;letter-spacing:.2px;font-size:14px;display:inline-flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;transition: transform .12s ease, filter .12s ease, background .12s ease;user-select:none;min-height:44px;}
     .btn:active{transform:translateY(1px)}
-    .btnPrimary{
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color:#081225;
-      box-shadow: 0 16px 40px rgba(110,168,255,.18);
-    }
+    .btnPrimary{background: linear-gradient(135deg, var(--accent), var(--accent2));color:#081225;box-shadow: 0 16px 40px rgba(110,168,255,.18);}
     .btnPrimary:hover{filter:brightness(1.05)}
-    .btnGhost{
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.14);
-      color:var(--text);
-    }
+    .btnGhost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:var(--text);}
     .btnGhost:hover{background:rgba(255,255,255,.09)}
-    .btnSmall{
-      padding:10px 12px;
-      border-radius:12px;
-      font-size:13px;
-      min-height:40px;
-    }
-    .icon{
-      width:18px;height:18px; display:inline-block;
-    }
+    .btnSmall{padding:10px 12px;border-radius:12px;font-size:13px;min-height:40px;}
+    .icon{width:18px;height:18px; display:inline-block;}
 
-    .heroSide{
-      padding:18px 18px;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
-    .stat{
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      padding:12px 12px;
-      border-radius:16px;
-      background:rgba(0,0,0,.18);
-      border:1px solid rgba(255,255,255,.10);
-    }
-    .stat .k{
-      color:var(--muted2);
-      font-size:12px;
-    }
-    .stat .v{
-      font-weight:700;
-      font-size:13px;
-    }
-    .notes{
-      padding:14px 14px;
-      border-radius:18px;
-      background:rgba(0,0,0,.18);
-      border:1px solid rgba(255,255,255,.10);
-    }
-    .notes h3{
-      margin:0 0 8px;
-      font-size:13px;
-      letter-spacing:.2px;
-      color:var(--muted);
-      font-weight:700;
-    }
-    .notes pre{
-      margin:0;
-      white-space:pre-wrap;
-      word-wrap:break-word;
-      font-family: var(--font);
-      color: var(--text);
-      font-size:13px;
-      line-height:1.55;
-    }
+    .heroSide{padding:18px 18px;display:flex;flex-direction:column;gap:12px;}
+    .stat{display:flex;justify-content:space-between;gap:10px;padding:12px 12px;border-radius:16px;background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.10);}
+    .stat .k{color:var(--muted2);font-size:12px;}
+    .stat .v{font-weight:700;font-size:13px;}
+    .flag{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;font-size:12px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);}
+    .flag.req{border-color: rgba(239,68,68,.35);background: rgba(239,68,68,.12);}
 
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
-      margin-top:18px;
-    }
-    .mini{
-      padding:16px 16px;
-      border-radius:22px;
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.10);
-    }
-    .mini h4{
-      margin:0 0 6px;
-      font-size:14px;
-      letter-spacing:.1px;
-    }
-    .mini p{
-      margin:0;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.6;
-    }
+    .notes{padding:14px 14px;border-radius:18px;background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.10);}
+    .notes h3{margin:0 0 8px;font-size:13px;letter-spacing:.2px;color:var(--muted);font-weight:700;}
+    .notes pre{margin:0;white-space:pre-wrap;word-wrap:break-word;font-family: var(--font);color: var(--text);font-size:13px;line-height:1.55;}
 
-    .section{
-      margin-top:18px;
-      padding:18px;
-    }
-    .section h3{
-      margin:0 0 10px;
-      font-size:16px;
-    }
-    .steps{
-      margin:0;
-      padding-left:18px;
-      color:var(--muted);
-      line-height:1.8;
-      font-size:13px;
-    }
-    .hint{
-      margin-top:12px;
-      padding:12px 12px;
-      border-radius:16px;
-      border:1px dashed rgba(255,255,255,.16);
-      color:var(--muted);
-      font-size:12px;
-      line-height:1.6;
-      background:rgba(255,255,255,.04);
-    }
+    .grid{display:grid;grid-template-columns: repeat(3, 1fr);gap:14px;margin-top:18px;}
+    .mini{padding:16px 16px;border-radius:22px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);}
+    .mini h4{margin:0 0 6px;font-size:14px;letter-spacing:.1px;}
+    .mini p{margin:0;color:var(--muted);font-size:13px;line-height:1.6;}
 
-    .footer{
-      margin-top:18px;
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-      color:var(--muted2);
-      font-size:12px;
-      padding:8px 4px 0;
-    }
-    .statusLine{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      color:var(--muted);
-      font-size:12px;
-      margin-top:8px;
-    }
-    code.inline{
-      background:rgba(0,0,0,.25);
-      border:1px solid rgba(255,255,255,.10);
-      padding:2px 7px;
-      border-radius:999px;
-      color:var(--text);
-      font-size:12px;
-    }
+    .section{margin-top:18px;padding:18px;}
+    .section h3{margin:0 0 10px;font-size:16px;}
+    .steps{margin:0;padding-left:18px;color:var(--muted);line-height:1.8;font-size:13px;}
+    .hint{margin-top:12px;padding:12px 12px;border-radius:16px;border:1px dashed rgba(255,255,255,.16);color:var(--muted);font-size:12px;line-height:1.6;background:rgba(255,255,255,.04);}
+
+    .footer{margin-top:18px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted2);font-size:12px;padding:8px 4px 0;}
+    .statusLine{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:12px;margin-top:8px;flex-wrap:wrap}
+    code.inline{background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.10);padding:2px 7px;border-radius:999px;color:var(--text);font-size:12px;}
 
     @media (max-width: 920px){
       .hero{grid-template-columns:1fr}
@@ -406,7 +168,9 @@
         <div class="statusLine">
           <span>Version:</span> <code class="inline" id="ver">—</code>
           <span>Build:</span> <code class="inline" id="build">—</code>
-          <span>Source:</span> <code class="inline">/version.json</code>
+          <span id="forceFlag" class="flag req" style="display:none;">Force update required</span>
+          <span>Updated:</span> <code class="inline" id="updatedAt">—</code>
+          <span>Source:</span> <code class="inline">version.json</code>
         </div>
 
         <div class="grid">
@@ -426,18 +190,9 @@
       </section>
 
       <aside class="card heroSide">
-        <div class="stat">
-          <div class="k">App</div>
-          <div class="v">OrderCollector Pro</div>
-        </div>
-        <div class="stat">
-          <div class="k">Platform</div>
-          <div class="v">Android (APK)</div>
-        </div>
-        <div class="stat">
-          <div class="k">Channel</div>
-          <div class="v">Latest Release</div>
-        </div>
+        <div class="stat"><div class="k">App</div><div class="v">OrderCollector Pro</div></div>
+        <div class="stat"><div class="k">Platform</div><div class="v">Android (APK)</div></div>
+        <div class="stat"><div class="k">Channel</div><div class="v">Latest Release</div></div>
 
         <div class="notes">
           <h3>Release Notes</h3>
@@ -456,8 +211,7 @@
       </ol>
 
       <div class="hint">
-        Tip: If you use GitHub Pages and see a cached old version, hard refresh (Ctrl+F5) or add a cache-buster like
-        <code class="inline">/version.json?v=</code> (this page already does that automatically).
+        Tip: If GitHub Pages caches an old version, hard refresh (Ctrl/Cmd+F5). This page adds a cache-busting query to <code class="inline">version.json</code> automatically.
       </div>
     </section>
 
@@ -478,24 +232,25 @@
       fetchText: document.getElementById("fetchText"),
       fetchDot: document.getElementById("fetchDot"),
       year: document.getElementById("year"),
-      meta: document.getElementById("meta")
+      meta: document.getElementById("meta"),
+      forceFlag: document.getElementById("forceFlag"),
+      updatedAt: document.getElementById("updatedAt")
     };
 
     els.year.textContent = new Date().getFullYear();
 
-    function setStatus(ok, text){
+    function setStatus(state, text){
+      // state: "ok" | "warn" | "err"
       els.fetchText.textContent = text;
-      els.fetchDot.classList.toggle("ok", !!ok);
+      els.fetchDot.classList.remove("ok","err");
+      if (state === "ok") els.fetchDot.classList.add("ok");
+      else if (state === "err") els.fetchDot.classList.add("err");
     }
 
-    function safeText(v){
-      if (v === null || v === undefined) return "—";
-      return String(v);
-    }
+    function safeText(v){ return (v === null || v === undefined) ? "—" : String(v); }
 
     function guessReleasePage(downloadUrl){
-      // If downloadUrl looks like: https://github.com/<owner>/<repo>/releases/download/v1.1.0/app-release.apk
-      // then release page is: https://github.com/<owner>/<repo>/releases/tag/v1.1.0
+      // https://github.com/<owner>/<repo>/releases/download/<tag>/<file> -> /releases/tag/<tag>
       try {
         const u = new URL(downloadUrl);
         const parts = u.pathname.split("/").filter(Boolean);
@@ -510,9 +265,10 @@
 
     async function loadVersion(){
       try{
-        // Cache-bust so GitHub Pages doesn’t serve an old JSON
-        const url = `/version.json?v=${Date.now()}`;
-        const res = await fetch(url, { cache: "no-store" });
+        // ✅ Relative to current page — works on repo subpaths
+        const vurl = new URL("./version.json", window.location.href);
+        vurl.searchParams.set("v", Date.now());
+        const res = await fetch(vurl.toString(), { cache: "no-store" });
         if(!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
 
@@ -520,12 +276,15 @@
         const buildNumber = safeText(data.buildNumber);
         const downloadUrl = safeText(data.downloadUrl);
         const releaseNotes = safeText(data.releaseNotes);
+        const forceUpdate = !!data.forceUpdate;
+        const updatedAt = safeText(data.updatedAt);
 
         els.ver.textContent = version;
         els.build.textContent = buildNumber;
+        els.updatedAt.textContent = updatedAt !== "—" ? updatedAt : new Date().toUTCString();
         els.notes.textContent = releaseNotes;
 
-        // Buttons
+        // Buttons & links
         if (downloadUrl && downloadUrl !== "—") {
           els.downloadBtn.href = downloadUrl;
           els.downloadBtn.setAttribute("aria-disabled","false");
@@ -539,18 +298,29 @@
               els.copyLinkBtn.textContent = "Copied ✓";
               setTimeout(() => els.copyLinkBtn.textContent = "Copy download link", 1400);
             }catch(e){
-              // Fallback if clipboard is blocked
               prompt("Copy this link:", downloadUrl);
             }
           });
         }
 
+        // Force update badge
+        if (forceUpdate) {
+          els.forceFlag.style.display = "inline-flex";
+          els.forceFlag.title = "This update is required.";
+        }
+
         els.meta.textContent = `v${version} (build ${buildNumber})`;
-        setStatus(true, "Latest release loaded");
+        setStatus("ok", "Latest release loaded");
       }catch(err){
         els.notes.textContent =
-          "Could not load /version.json.\n\nFix:\n- Ensure version.json exists at the repo root\n- If using GitHub Pages, confirm it is published on the same branch\n- Check JSON syntax";
-        setStatus(false, "Failed to load release info");
+`Could not load version.json.
+
+Fix:
+• Ensure version.json exists next to index.html
+• If using GitHub Pages, publish from the same branch/folder
+• Check JSON syntax
+• If using a repo site (username.github.io/repo), keep the relative path`;
+        setStatus("err", "Failed to load release info");
         els.meta.textContent = "Not available";
         console.error(err);
       }
